@@ -1,7 +1,6 @@
 # SocketHttpServer
 
-A simple http server with java socket
-
+使用java socket的http服务器
 
 ### Usage
 
@@ -12,7 +11,7 @@ int port = 8080;
 HttpServer server = new HttpServer(port);
 ```
 
-start server
+启动
 
 ```java
 try {
@@ -22,7 +21,7 @@ try {
 }
 ```
 
-stop server
+关闭
 
 ```java
 try {
@@ -32,7 +31,7 @@ try {
 }
 ```
 
-add router
+添加路由
 
 ```java
 server.addRouter("/",new HttpServer.RouterHandler() {
@@ -45,9 +44,9 @@ server.addRouter("/",new HttpServer.RouterHandler() {
 });
 ```
 
-use default router when router not matched
+当路由不匹配是使用默认路由
 
-* in default router handler, the context.router may be null
+* 使用默认路由时，RouterContext.router为空
 
 ```java
 server.setDeafultHandler(new HttpServer.RouterHandler() {
@@ -61,24 +60,24 @@ server.setDeafultHandler(new HttpServer.RouterHandler() {
 });
 ```
 
-set static file router
+设置静态文件路由
 
 * /css/a.css -> webroot/css/a.css
-* staticFileHandler's path must be same as router
+* staticFileHandler的参数'path'必须和路由的path一样
 
 ```java
 server.addRouter("/css", 
     HttpServer.staticFileHandler(new File("webroot/css/"), "/css"));
 ```
 
-host static file
+静态文件
 
-**not recommend, why not use nginx?**
+**为什么不用强无敌的nginx，，，**
 
 ```java
 server.setDeafultHandler(HttpServer.staticFileHandler(new File("path/to"),""));
 ```
 
-### something else
+### 其他
 
-you can delete function **INIT_MINIMAL_MIME_TYPE()** or **INIT_FULL_MIME_TYPE()** and then uncomment **static{}** in line 511, then you don't need to init mime type in your code
+可以删除函数 **INIT_MINIMAL_MIME_TYPE()** 或 **INIT_FULL_MIME_TYPE()** 来节省空间， 取消511行左右的 **static{}** 的注释这样就不用在代码里面初始化mime type了
